@@ -4,11 +4,10 @@ import path, { dirname } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index.js';
+import homeRouter from './controllers/homeController.js'
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 import { fileURLToPath } from 'url';
-import router from "./routes/index.js";
 
 
 var app = express();
@@ -26,9 +25,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// esto es en orden de prioridades
+app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

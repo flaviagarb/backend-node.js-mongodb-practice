@@ -1,0 +1,11 @@
+<%- include('header.ejs') %>
+
+  <h2>Productos</h2>
+
+  <% products.forEach(product=> { %>
+    <p>
+      <%= product.name %>
+    </p>
+    <% }) %>
+
+      <%- include('footer.ejs') %>
