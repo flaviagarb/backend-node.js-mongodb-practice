@@ -23,9 +23,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// public: acceder directamente desde navegador ; path.join correcto desde cualquier SO ; __dirname ubicacion del archivo actual
 app.use(express.static(path.join(__dirname, 'public')));
 
-// esto es en orden de prioridades
+// esto es importante: va en orden de prioridades
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
