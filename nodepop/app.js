@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectMongoose from './lib/connectMongoose.js'
 
-import homeRouter from './controllers/homeController.js'
+import homeRouter from './routes/home.js'
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 import { fileURLToPath } from 'url';
