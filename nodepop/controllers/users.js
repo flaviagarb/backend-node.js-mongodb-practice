@@ -1,10 +1,17 @@
 // import User from '../models/User.js'; 
 
+import User from "../models/User";
+
 // GET user
 
 const UserController = {
   get: async (req, res, next) => {
-    res.send('respond with a resource');
+    try {
+      const users = await User.find();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
   }
 };
 

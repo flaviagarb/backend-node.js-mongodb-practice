@@ -1,6 +1,7 @@
 import readline from 'node:readline/promises'
 import connectMongoose from "./lib/connectMongoose.js";
 import Product from './models/Product.js';
+import User from './models/User.js'
 
 
 const randomImg = Math.floor(Math.random() * 1000)
@@ -43,6 +44,32 @@ async function initDBNodepop() {
     ])
     console.log(`Inserted ${insertProduct} products. Total products ${insertProduct.length}`)
 }
+
+// iniciando Usuarios
+
+await initUsers()
+
+async function initUsers() {
+    // delete all agents 
+    const result = await User.deleteMany()
+    console.log(`Deleted ${result.deletedCount} users.`)
+
+    // create users
+    const insertResult = await User.insertMany([
+        {
+            name: 'Marta Leon',
+            email: 'adming@example.com',
+            password: await User.hashPassword('1234')
+        },
+        {
+            name: 'Jorge Autin',
+            email: 'user@example.com',
+            password: await User.hashPassword('1234')
+        },
+    ])
+    console.log(`Inserted ${insertResult.length} users.`)
+}
+
 
 async function ask(question) {
     const rl = readline.createInterface({
