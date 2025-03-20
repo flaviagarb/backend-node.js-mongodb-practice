@@ -1,15 +1,17 @@
 import express from 'express';
-import products from '../models/Products.js';
+import Product from '../models/Product.js';
 
 const router = express.Router();
 
 /* GET products */
 router.get('/', async (req, res, next) => {
     try {
-        console.log('mostrando productos'); // esto se imprimirá en la terminal del servidor
-        res.json(products); // esto envia la lista de productos como json al navegador(cliente)
+        console.log('Mostrando productos desde la base de datos');
+        const products = await Product.find();
+        res.json(products);
     } catch (error) {
-        next(error); // manejo de errores si ocurre algo inesperado
+        console.error('Error al obtener productos:', error);
+        next(error);
     }
 });
 
