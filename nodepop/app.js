@@ -3,14 +3,17 @@ import express from 'express';
 import path, { dirname } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import connectMongoose from './lib/connectMongoose.js'
 
 import homeRouter from './controllers/homeController.js'
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 import { fileURLToPath } from 'url';
 
+await connectMongoose() // top level await thanks to ES Modules
+console.log('Connected to MongoDB')
 
-var app = express();
+const app = express();
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
