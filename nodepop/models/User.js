@@ -14,8 +14,11 @@ userScherma.statics.hashPassword = (clearPassword) => {
     return bcrypt.hash(clearPassword, 7) //esto devuelve una promesa que se resuleve a una password cifrada
 }
 
+userSchema.methods.comparePassword = function (clearPassword) {
+    // this --> user
+    return bcrypt.compare(clearPassword, this.password)
+}
 // crear el modelo
 const User = mongoose.model('User', userScherma)
-
 
 export default User;

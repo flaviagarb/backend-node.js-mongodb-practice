@@ -9,6 +9,8 @@ import homeRouter from './routes/home.js'
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 import { fileURLToPath } from 'url';
+import * as loginController from './controllers/loginController.js';
+import * as sessionManager from './lib/sessionManager.js';
 
 await connectMongoose() // top level await thanks to ES Modules
 console.log('Connected to MongoDB')
@@ -33,6 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.get('/login', loginController.index);
+app.post('/login', loginController.postLogi)
+app.use(sessionManager.middleware)
+app.use((req, res, next) => {
+  res.locals.session = req.session
+})
 
 
 // catch 404 and forward to error handler
