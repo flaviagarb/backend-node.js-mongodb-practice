@@ -14,8 +14,8 @@ if (answer.toLowerCase() !== 'y') {
     process.exit()
 }
 
-await initDBNodepop()
-await connection.close()
+await initDBNodepop();
+await initUsers();
 
 async function initDBNodepop() {
     // delete all products al iniciar DDBB
@@ -26,28 +26,25 @@ async function initDBNodepop() {
         {
             name: 'Mobile',
             price: 500,
-            image: 'https://picsum.photos/id/${randomImg}/300/200;',
+            image: `https://picsum.photos/id/${randomImg}/300/200`,
             tags: ['mobile', 'motor', 'lifestyle']
         },
         {
             name: 'Tablet',
             price: 600,
-            image: 'https://picsum.photos/id/${randomImg}/300/200;',
+            image: `https://picsum.photos/id/${randomImg}/300/200`,
             tags: ['mobile', 'motor', 'lifestyle']
         },
         {
             name: 'MTV',
             price: 700,
-            image: 'https://picsum.photos/id/${randomImg}/300/200;',
+            image: `https://picsum.photos/id/${randomImg}/300/200`,
             tags: ['mobile', 'motor', 'lifestyle']
         },
     ])
     console.log(`Inserted ${insertProduct} products. Total products ${insertProduct.length}`)
 }
 
-// iniciando Usuarios
-
-await initUsers()
 
 async function initUsers() {
     // delete all agents 
@@ -58,7 +55,7 @@ async function initUsers() {
     const insertResult = await User.insertMany([
         {
             name: 'Marta Leon',
-            email: 'adming@example.com',
+            email: 'admin@example.com',
             password: await User.hashPassword('1234')
         },
         {
@@ -80,3 +77,5 @@ async function ask(question) {
     rl.close()
     return result
 }
+
+await connection.close();
