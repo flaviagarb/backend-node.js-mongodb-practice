@@ -2,7 +2,7 @@ import User from '../models/User.js';
 
 export function index(req, res, next) {
     res.locals.error = ''
-    res.local.email = ''
+    res.locals.email = ''
     res.render('login')
 }
 

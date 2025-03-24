@@ -2,23 +2,23 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt';
 
 //definir el esquema
-const userScherma = new Schema({
+const userSchema = new Schema({
     name: String,
     email: { type: String, required: true, unique: true },
     password: String
-})
+});
 
 // método del modelo
 
-userScherma.statics.hashPassword = (clearPassword) => {
+userSchema.statics.hashPassword = (clearPassword) => {
     return bcrypt.hash(clearPassword, 7) //esto devuelve una promesa que se resuleve a una password cifrada
 }
 
 userSchema.methods.comparePassword = function (clearPassword) {
-    // this --> user
-    return bcrypt.compare(clearPassword, this.password)
-}
+    return bcrypt.compare(clearPassword, this.password);
+};
+
 // crear el modelo
-const User = mongoose.model('User', userScherma)
+const User = mongoose.model('User', userSchema)
 
 export default User;

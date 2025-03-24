@@ -24,6 +24,8 @@ const __dirname = dirname(__filename)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.locals.title = 'Nodepop';
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,15 +34,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // esto es importante: va en orden de prioridades
+app.use(sessionManager.middleware);
+app.use(sessionManager.useSessionInViews); // creamos sessionManager.js
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.get('/login', loginController.index);
-app.post('/login', loginController.postLogi)
-app.use(sessionManager.middleware)
-app.use((req, res, next) => {
-  res.locals.session = req.session
-})
+app.post('/login', loginController.postLogin);
+app.get('/logout', loginController.logout);
+//app.get('/agents/new', sessionManager.guard, agentsController.index)
+//app.post('/agents/new', sessionManager.guard, agentsController.postNew)
+
 
 
 // catch 404 and forward to error handler

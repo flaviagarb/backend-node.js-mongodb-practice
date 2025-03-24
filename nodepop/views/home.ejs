@@ -1,11 +1,18 @@
 <%- include('header.ejs') %>
 
-  <h2>Productos</h2>
   <div>
-    <% products.forEach(product=> { %>
-      <p>
-        <%= product.name %>
-      </p>
-      <% }) %>
+    <p>User ID: <%= session.userId %>
+    </p>
+    <% if (!session.userId) { %>
+      <% // contenido para usuarios NO logados %>
+        <p><a href="/login">Login</a> to access your products</p>
+        <% } else { %>
+          <h2>Products</h2>
+          <% products.forEach(product=> { %>
+            <p>
+              <%= product.name %>
+            </p>
+            <% }) %>
+              <% } %>
   </div>
   <%- include('footer.ejs') %>

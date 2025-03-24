@@ -6,7 +6,7 @@ import Product from '../models/Product.js';
 const HomeController = {
     get: async (req, res, next) => {
         try {
-            res.locals.title = 'Nodepop';
+            res.locals.session = req.session;
             res.locals.products = await Product.find();
             res.render('home');
         } catch (error) {
