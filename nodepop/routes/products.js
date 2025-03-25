@@ -1,4 +1,5 @@
 import express from 'express';
+import { guard } from '../lib/sessionManager.js';
 import ProductController from '../controllers/products.js';
 
 
@@ -8,7 +9,7 @@ const router = express.Router();
 router.get('/', ProductController.get);
 
 /* GET / POST new products */
-router.get('/new', ProductController.get)
-router.post('/new', ProductController.postNew);
+router.get('/new', guard, ProductController.getNew)
+router.post('/new', guard, ProductController.postNew);
 
 export default router;

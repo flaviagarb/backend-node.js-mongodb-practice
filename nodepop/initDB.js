@@ -14,8 +14,9 @@ if (answer.toLowerCase() !== 'y') {
     process.exit()
 }
 
-await initDBNodepop();
 await initUsers();
+await initDBNodepop();
+
 
 async function initDBNodepop() {
     // delete all products al iniciar DDBB
@@ -32,21 +33,21 @@ async function initDBNodepop() {
         {
             name: 'Mobile',
             price: 500,
-            image: `https://picsum.photos/id/${randomImg}/300/200`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/300/200`,
             tags: ['mobile'],
             owner: user._id
         },
         {
             name: 'Tablet',
             price: 600,
-            image: `https://picsum.photos/id/${randomImg}/300/200`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/300/200`,
             tags: ['mobile', 'lifestyle'],
             owner: user._id
         },
         {
             name: 'MTV',
             price: 700,
-            image: `https://picsum.photos/id/${randomImg}/300/200`,
+            image: `https://picsum.photos/id/${Math.floor(Math.random() * 1000)}/300/200`,
             tags: ['lifestyle'],
             owner: admin._id
         },

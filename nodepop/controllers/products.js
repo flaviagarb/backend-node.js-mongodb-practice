@@ -11,11 +11,19 @@ const ProductController = {
             next(error);
         }
     },
+    // funcion async que obtiene el formulario de new product
+    getNew: async (req, res, next) => {
+        res.render('new-product')
+    },
+    // funcion async que guarda el new product intro
     postNew: async (req, res, next) => {
         try {
-            const { name, owner, price, image, tags } = req.body
-            const userId = req.session.userId
+            const { name, price, image, tags } = req.body
+            const owner = req.session.userId
 
+            // añadir validaciones de express validator 
+
+            // creo objeto en memoria
             const product = new Product({
                 name,
                 owner,
