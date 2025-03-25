@@ -18,15 +18,18 @@ const ProductController = {
     // funcion async que guarda el new product intro
     postNew: async (req, res, next) => {
         try {
-            const { name, price, image, tags } = req.body
-            const owner = req.session.userId
+            const { name, price, image } = req.body
+            const userId = req.session.userId
+            const tags = Array.isArray(req.body.tags)
+                ? req.body.tags
+                : [req.body.tags];
 
             // añadir validaciones de express validator 
 
             // creo objeto en memoria
             const product = new Product({
                 name,
-                owner,
+                owner: userId,
                 price,
                 image,
                 tags
@@ -38,6 +41,18 @@ const ProductController = {
             //vuelve a la home para que se vea la lista
             res.redirect('/')
 
+        } catch (error) {
+            next(error)
+        }
+    },
+    deleteProduct: async (req, res, next) => {
+        try {
+            const userId = req.session.userId
+            const productId = req.params.productId
+
+            await Product.deleteOne({ _id: productId, owner: userId })
+
+            res.redirect('/')
         } catch (error) {
             next(error)
         }

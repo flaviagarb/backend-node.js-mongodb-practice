@@ -12,4 +12,7 @@ router.get('/', ProductController.get);
 router.get('/new', guard, ProductController.getNew)
 router.post('/new', guard, ProductController.postNew);
 
+/* DELETE PRODUCT */
+router.get('/delete/:productId', guard, ProductController.deleteProduct)
+
 export default router;
