@@ -4,7 +4,7 @@ import mongoose, { Schema } from 'mongoose'
 // definir el esquema de los productos
 const productSchema = new Schema({
     name: String,
-    owner: { ref: 'User', type: mongoose.Schema.Types.ObjectId },
+    owner: { type: Schema.Types.ObjectId, ref: 'User, index: true' },
     price: Number,
     image: String,
     tags: [String]

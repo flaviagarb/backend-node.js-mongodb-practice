@@ -20,26 +20,35 @@ await initUsers();
 async function initDBNodepop() {
     // delete all products al iniciar DDBB
     const products = await Product.deleteMany()
-    console.log(products)
+    console.log(`Deleted ${products.deletedCount} products.`)
+
+    const [admin, user] = await Promise.all([
+        User.findOne({ email: 'admin@example.com' }),
+        User.findOne({ email: 'user@example.com' }),
+    ])
+
     // create product
     const insertProduct = await Product.insertMany([
         {
             name: 'Mobile',
             price: 500,
             image: `https://picsum.photos/id/${randomImg}/300/200`,
-            tags: ['mobile', 'motor', 'lifestyle']
+            tags: ['mobile'],
+            owner: user._id
         },
         {
             name: 'Tablet',
             price: 600,
             image: `https://picsum.photos/id/${randomImg}/300/200`,
-            tags: ['mobile', 'motor', 'lifestyle']
+            tags: ['mobile', 'lifestyle'],
+            owner: user._id
         },
         {
             name: 'MTV',
             price: 700,
             image: `https://picsum.photos/id/${randomImg}/300/200`,
-            tags: ['mobile', 'motor', 'lifestyle']
+            tags: ['lifestyle'],
+            owner: admin._id
         },
     ])
     console.log(`Inserted ${insertProduct} products. Total products ${insertProduct.length}`)

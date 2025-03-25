@@ -8,8 +8,8 @@ import connectMongoose from './lib/connectMongoose.js'
 import homeRouter from './routes/home.js'
 import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
+import authRouter from './routes/auth.js';
 import { fileURLToPath } from 'url';
-import * as loginController from './controllers/loginController.js';
 import * as sessionManager from './lib/sessionManager.js';
 
 await connectMongoose() // top level await thanks to ES Modules
@@ -39,12 +39,7 @@ app.use(sessionManager.useSessionInViews); // creamos sessionManager.js
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-app.get('/login', loginController.index);
-app.post('/login', loginController.postLogin);
-app.get('/logout', loginController.logout);
-//app.get('/agents/new', sessionManager.guard, agentsController.index)
-//app.post('/agents/new', sessionManager.guard, agentsController.postNew)
-
+app.use('/auth', authRouter);
 
 
 // catch 404 and forward to error handler

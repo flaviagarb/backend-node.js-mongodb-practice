@@ -1,4 +1,5 @@
 
+import { name } from 'ejs';
 import Product from '../models/Product.js';
 
 //GET HOMEPAGE

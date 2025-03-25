@@ -1,18 +1,24 @@
 <%- include('header.ejs') %>
 
-  <div>
-    <p>User ID: <%= session.userId %>
-    </p>
+  <div class="container">
+
+    <p>User ID: <%= session.userId %></p>
+
     <% if (!session.userId) { %>
       <% // contenido para usuarios NO logados %>
-        <p><a href="/login">Login</a> to access your products</p>
+        <p><a href="/auth/login">Login</a> to access your products</p>
         <% } else { %>
           <h2>Products</h2>
-          <% products.forEach(product=> { %>
+          <% products.forEach(product => { %>
             <p>
-              <%= product.name %>
+              <%= product.name %> |
+              <%= product.owner %> |
+              <%= product.price %>€ |
+              <img src="<%= product.image %>" alt="<%= product.name %>" width="100" /> |
+              <%= product.tags.join(', ') %>
             </p>
-            <% }) %>
-              <% } %>
+          <% }) %>
+        <% } %>
   </div>
+  
   <%- include('footer.ejs') %>

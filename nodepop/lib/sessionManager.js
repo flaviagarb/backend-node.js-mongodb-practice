@@ -21,7 +21,7 @@ export function useSessionInViews(req, res, next) {
 
 export function guard(req, res, next) {
     if (!req.session.userId) {
-        res.redirect(`/login?redir=${req.url}`);
+        res.redirect(`/auth/login?redir=${req.url}`);
         return;
     }
     next();

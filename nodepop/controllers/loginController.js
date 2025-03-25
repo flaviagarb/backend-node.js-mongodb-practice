@@ -11,8 +11,11 @@ export async function postLogin(req, res, next) {
         const { email, password } = req.body
         const redir = req.query.redir
 
+
+        //buscar el usuario en DDBB
         const user = await User.findOne({ email: email })
 
+        // si no lo encuentro y contra no coincide = error
         if (!user || !(await user.comparePassword(password))) {
             res.locals.error = 'Invalid credentials'
             res.locals.email = email
@@ -20,6 +23,7 @@ export async function postLogin(req, res, next) {
             return
         }
 
+        // si el usuario existe y la contraok, redirect a home
         req.session.userId = user.id
 
         res.redirect(redir ? redir : '/')
