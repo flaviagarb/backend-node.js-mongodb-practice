@@ -92,7 +92,7 @@ It simulates a real-world platform where users can sell second-hand items, manag
 ---
 
 ## Project Structure
-
+```
 nodepop/
 ├── bin/
 │   └── www
@@ -116,6 +116,7 @@ nodepop/
 │   └── footer.ejs
 ├── initDB.js
 └── app.js
+```
 
 ---
 
