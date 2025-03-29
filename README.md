@@ -33,6 +33,7 @@ It simulates a real-world platform where users can sell second-hand items, manag
 - Products are displayed using Bootstrap cards
 - Init script to populate the database with users and products
 - Clean and responsive UI using Bootstrap and EJS templates
+- ESLint 
 
 ### Technologies Used:
 
@@ -41,6 +42,7 @@ It simulates a real-world platform where users can sell second-hand items, manag
 - **MongoDB** for the database
 - **EJS** for rendering dynamic HTML pages
 - **Bootstrap** for responsive design and UI components
+- **ESLint** for improve code quality
 
 ---
 
