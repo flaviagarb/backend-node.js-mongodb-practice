@@ -2,10 +2,7 @@ import readline from 'node:readline/promises'
 import connectMongoose from "./lib/connectMongoose.js";
 import Product from './models/Product.js';
 import User from './models/User.js';
-import Chance from 'chance';
 
-const chance = new Chance();
-const randomImg = Math.floor(Math.random() * 1000)
 const connection = await connectMongoose()
 console.log('Connected to MongoDB:', connection.name)
 
